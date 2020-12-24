@@ -4,15 +4,26 @@ import { Link } from "react-router-dom";
 import athlete from "../img/athlete-small.png";
 import goodtimes from "../img/goodtimes-small.png";
 import theracer from "../img/theracer-small.png";
+// Page animation
+import { motion } from "framer-motion";
+import { pageAnimation, imageAnim, fade, lineAnim } from "../animation";
 
 const OurWork = () => {
   return (
-    <Work>
+    <Work
+      exit="exit"
+      variants={pageAnimation}
+      initial="hidden"
+      animate="show"
+      style={{ background: "#fff" }}
+    >
       <Movie>
-        <h2>Athlete</h2>
-        <div className="line"></div>
+        <motion.h2 variants={fade}>Athlete</motion.h2>
+        <motion.div variants={lineAnim} className="line"></motion.div>
         <Link to="/work/the-athlete">
-          <img src={athlete} alt="athlete" />
+          <Hide>
+            <motion.img variants={imageAnim} src={athlete} alt="athlete" />
+          </Hide>
         </Link>
       </Movie>
       <Movie>
@@ -33,7 +44,7 @@ const OurWork = () => {
   );
 };
 
-const Work = styled.div`
+const Work = styled(motion.div)`
   padding: 5rem 10rem;
   min-height: 100vh;
   overflow: hidden;
@@ -42,11 +53,15 @@ const Work = styled.div`
   }
 `;
 
+const Hide = styled.div`
+  overflow: hidden;
+`;
+
 const Movie = styled.div`
   padding-bottom: 10rem;
   .line {
     height: 0.5rem;
-    background: #cccccc;
+    background: #23d997;
     margin-bottom: 3rem;
   }
   img {
